@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technologia AI</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1020;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+    h1 { color: #64e7ff; font-size: 36px; }
+    .card {
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #171f36;
+      border-radius: 18px;
+    }
+    input, textarea, button {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      background: #64e7ff;
+      color: #0b1020;
+      font-weight: bold;
+    }
+    #answer {
+      white-space: pre-wrap;
+      line-height: 1.6;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>Technologia</h1>
+  <p>Your AI Study Companion 📚</p>
+
+  <div class="card">
+    <h2>Ask a Study Question</h2>
+    <textarea id="question" rows="4"
+      placeholder="Ask a Maths, Science or other study question..."></textarea>
+    <button onclick="answerQuestion()">Get Help</button>
+    <p id="answer">Your answer will appear here.</p>
+  </div>
+
+  <div class="card">
+    <h2>Quiz Practice 📝</h2>
+    <p id="quiz">What is 8 × 7?</p>
+    <input id="quizAnswer" placeholder="Enter your answer">
+    <button onclick="checkQuiz()">Check Answer</button>
+    <p id="result"></p>
+    <button onclick="newQuiz()">Next Question</button>
+  </div>
+
+  <script>
+    function answerQuestion() {
+      const q = document.getElementById("question").value.trim();
+      if (!q) {
+        document.getElementById("answer").textContent =
+          "Please enter a question first.";
+        return;
+      }
+      document.getElementById("answer").textContent =
+        "Technologia is ready to help! To enable real AI answers, " +
+        "we need to connect a secure AI service. For now, try the quiz below.";
+    }
+
+    const questions = [
+      { q: "What is 8 × 7?", a: "56" },
+      { q: "What is 12 × 6?", a: "72" },
+      { q: "What is the chemical symbol for oxygen?", a: "O" },
+      { q: "How many sides does a hexagon have?", a: "6" },
+      { q: "What is 100 ÷ 4?", a: "25" }
+    ];
+
+    let current = 0;
+
+    function checkQuiz() {
+      const answer = document.getElementById("quizAnswer")
+        .value.trim().toLowerCase();
+      document.getElementById("result").textContent =
+        answer === questions[current].a.toLowerCase()
+          ? "Correct! 🎉 Well done!"
+          : "Not quite. Try again!";
+    }
+
+    function newQuiz() {
+      current = (current + 1) % questions.length;
+      document.getElementById("quiz").textContent =
+        questions[current].q;
+      document.getElementById("quizAnswer").value = "";
+      document.getElementById("result").textContent = "";
+    }
+  </script>
+</body>
+</html>
